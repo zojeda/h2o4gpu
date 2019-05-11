@@ -25,9 +25,9 @@ attach_attrs_to_model <- function(r_model_obj) {
       model_attrs[!model_attrs %in% attrs_exclude_from_attach],
       function(attrib) {
         if (grepl("H2O", as.character(r_model_obj$model))){
-          r_model_obj[[attrib]] <<- r_model_obj$model[[attrib]]
+          try({r_model_obj[[attrib]] <<- r_model_obj$model[[attrib]]})
         } else { 
-          r_model_obj[[attrib]] <<- r_model_obj$model$model[[attrib]]
+          try({r_model_obj[[attrib]] <<- r_model_obj$model$model[[attrib]]})
         }
       }))
   r_model_obj
